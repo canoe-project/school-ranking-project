@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -67,7 +68,7 @@ model School {
   ADRCD_NM            String?
   ADRCD_CD            String?
   LCTN_SC_CODE        String?
-  SCHUL_CODE          String?
+  SCHUL_CODE          String? @unique
   SCHUL_NM            String?
   SCHUL_KND_SC_CODE   String?
   FOND_SC_CODE        String?
@@ -92,4 +93,12 @@ model School {
   PERC_FAXNO          String?
   HMPG_ADRES          String?
   COEDU_SC_CODE       String?
+  // Infrastructure      Infrastructure[]
+}
+
+model Infrastructure {
+  id String @id @default(cuid())
+  // schoolId String
+  // school   School @relation(fields: [schoolId], references: [SCHUL_CODE])
+  // private_academy 
 }

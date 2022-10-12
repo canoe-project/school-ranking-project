@@ -26,10 +26,11 @@
       "data/*": ["data/*"]
     }
   },
+  "types": ["kakao.maps.d.ts"],
   "include": [
     "process.d.ts",
     "next-env.d.ts",
-    "types/next-auth.d.ts",
+    "types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
   ],

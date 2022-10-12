@@ -8,6 +8,7 @@ const nextConfig = {
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
     HOSTNAME: process.env.HOSTNAME,
+    CANOE_MAP_KEY : process.env.CANOE_MAP_KEY
   },
 
   webpack(config) {

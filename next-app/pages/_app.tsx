@@ -1,8 +1,10 @@
+import type { Session } from 'next-auth';
+// eslint-disable-next-line import/order
 import { SessionProvider } from 'next-auth/react';
+
 import './styles.css';
 
 import type { AppProps } from 'next/app';
-import type { Session } from 'next-auth';
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.

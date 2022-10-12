@@ -24,6 +24,7 @@
     "prisma": "^4.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-kakao-maps-sdk": "^1.1.4",
     "strip-bom": "^5.0.0",
     "styled-jsx-plugin-postcss": "^4.0.1"
   },
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "kakao.maps.d.ts": "^0.1.33",
     "lint-staged": "^12.3.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
