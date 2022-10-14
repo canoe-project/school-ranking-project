@@ -21,7 +21,6 @@ const asyncInit = (
         const bounds = new kakao.maps.LatLngBounds();
 
         data.map((d) => {
-          console.log(d);
           bounds.extend(
             new kakao.maps.LatLng(parseFloat(d.y), parseFloat(d.x))
           );

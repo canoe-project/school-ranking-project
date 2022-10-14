@@ -1,0 +1,2 @@
+-- CreateIndex
+CREATE FULLTEXT INDEX `School_SCHUL_CODE_SCHUL_NM_idx` ON `School`(`SCHUL_CODE`, `SCHUL_NM`);

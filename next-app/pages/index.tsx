@@ -1,86 +1,79 @@
-import { useState } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useDispatch, useSelector } from 'react-redux';
 
-import useGeoLocation from 'hook/useGeolocation';
-import { useSearchMap } from 'hook/useSearchMap';
-
-const handleMarker = (marker: kakao.maps.services.PlacesSearchResultItem) => {
-  console.log(marker);
-};
+import TopSchoolList from 'components/list/TopSchoolList';
+import SchoolPickMap from 'components/map/SchoolPickMap';
+import { useGeolocation } from 'hook/useGeolocation';
+import { useSearchKeyword } from 'hook/useSearchKeyword';
+import { RootState } from 'store/store';
+import { setUserLocation } from 'store/userLocationReducer';
 
 function App() {
+  const user = useSelector((state: RootState) => state.user);
+  const aorundSchoolsRudux = useSelector((state: RootState) => state.school);
+  const dispatch = useDispatch();
+
   // const [info, setInfo] =
   //   useState<kakao.maps.services.PlacesSearchResultItem>();
-  const [map, setMap] = useState<kakao.maps.Map>();
-  const location = useGeoLocation();
-  const markers = useSearchMap('공공기관', map, location);
+  // const [map, setMap] = useState<kakao.maps.Map>();
+  const location = useGeolocation();
+  const aroundSchools = useSearchKeyword('학교', location);
 
-  // useEffect(() => {
-  //   console.log(markers);
-  // }, [markers]);
+  // const markers = useSearchMap('학교', map, location);
+
+  const [loading, setLoading] = useState(true);
+  // const [klocation, setLocation] = useState<kakao.maps.LatLng>();
+
+  // const coder = useGeocoder(klocation);
+
+  useEffect(() => {
+    kakao.maps.load(() => {
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (location.loaded) {
+      dispatch(
+        setUserLocation({
+          lat: location.coordinates?.lat,
+          lng: location.coordinates?.lng,
+        })
+      );
+    }
+  }, [location, dispatch]);
+  if (loading) return <></>;
   return (
-    <Map // 로드뷰를 표시할 Container
-      center={{
-        lat: 37.4907391344019,
-        lng: 127.015423519689,
-      }}
-      style={{
-        width: '100%',
-        height: '350px',
-      }}
-      level={3}
-      onCreate={setMap}
-    >
-      {markers &&
-        markers.map((marker) => (
-          <MapMarker
-            key={`marker-${marker.place_name}-${marker.y},${marker.x}`}
-            position={{ lat: parseFloat(marker.y), lng: parseFloat(marker.x) }}
-            onClick={() => handleMarker(marker)}
-          >
-            {/* {info && info.content === marker.content && (
-              <div style={{ color: '#000' }}>{marker.content}</div>
-            )} */}
-          </MapMarker>
-        ))}
-    </Map>
+    <div className="App">
+      {location.loaded ? (
+        <Fragment>
+          <TopSchoolList></TopSchoolList>
+          <SchoolPickMap
+            aorundSchool={aorundSchoolsRudux}
+            location={location}
+          />
+          <ul>
+            {aroundSchools &&
+              aorundSchoolsRudux.map((school, idx) => {
+                // console.log(school);
+                return (
+                  <li key={`${idx}-${school.SCHUL_NM}`}>
+                    <p>{school.SCHUL_NM}</p>
+                    {/* <SchoolListItem
+                      schoolName={school.place_name}
+                      key={idx}
+                      index={idx}
+                    /> */}
+                  </li>
+                );
+              })}
+          </ul>
+        </Fragment>
+      ) : (
+        'Location data not available yet.'
+      )}
+    </div>
   );
-  // const location = useGeoLocation();
-
-  // useEffect(() => {}, [location]);
-
-  // return (
-  //   <div className="App">
-  //     {location.loaded ? (
-  //       <UserMap
-  //         lat={
-  //           location.coordinates?.lat === undefined
-  //             ? 0
-  //             : location.coordinates?.lat
-  //         }
-  //         lng={
-  //           location.coordinates?.lng === undefined
-  //             ? 0
-  //             : location.coordinates?.lng
-  //         }
-  //       />
-  //     ) : (
-  //       'Location data not available yet.'
-  //     )}
-  //   </div>
-  // );
 }
-
 export default App;
-// export default function IndexPage() {
-//   return (
-//     <Layout>
-//       <h1>NextAuth.js Example</h1>
-//       <p>
-//         This is an example site to demonstrate how to use{' '}
-//         <a href="https://next-auth.js.org">NextAuth.js</a> for authentication.
-//       </p>
-//     </Layout>
-//   );
-// }

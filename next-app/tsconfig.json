@@ -27,12 +27,6 @@
     }
   },
   "types": ["kakao.maps.d.ts"],
-  "include": [
-    "process.d.ts",
-    "next-env.d.ts",
-    "types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["types/**/*.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

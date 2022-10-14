@@ -9,10 +9,6 @@ class MyDocument extends Document {
     return (
       <Html lang={AppConfig.locale}>
         <Head>
-          <Script
-            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.CANOE_MAP_KEY}&libraries=services,clusterer&autoload=false`}
-            strategy="beforeInteractive"
-          />
           <link
             href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet"
@@ -36,6 +32,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <Script
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.CANOE_MAP_KEY}&libraries=services,clusterer&autoload=false`}
+            strategy="beforeInteractive"
+          />
         </body>
       </Html>
     );

@@ -93,7 +93,40 @@ model School {
   PERC_FAXNO          String?
   HMPG_ADRES          String?
   COEDU_SC_CODE       String?
+
   // Infrastructure      Infrastructure[]
+  @@fulltext([SCHUL_NM])
+  @@fulltext([SCHUL_CODE])
+  @@fulltext([ATPT_OFCDC_ORG_NM])
+}
+
+model SchoolNice {
+  id                        String @id @default(cuid())
+  ATPT_OFCDC_SC_CODE        String
+  ATPT_OFCDC_SC_NM          String
+  SD_SCHUL_CODE             String
+  SCHUL_NM                  String
+  ENG_SCHUL_NM              String
+  SCHUL_KND_SC_NM           String
+  LCTN_SC_NM                String
+  JU_ORG_NM                 String
+  FOND_SC_NM                String
+  ORG_RDNZC                 String
+  ORG_RDNMA                 String
+  ORG_RDNDA                 String
+  ORG_TELNO                 String
+  HMPG_ADRES                String
+  COEDU_SC_NM               String
+  ORG_FAXNO                 String
+  HS_SC_NM                  String
+  INDST_SPECL_CCCCL_EXST_YN String
+  HS_GNRL_BUSNS_SC_NM       String
+  SPCLY_PURPS_HS_ORD_NM     String
+  ENE_BFE_SEHF_SC_NM        String
+  DGHT_SC_NM                String
+  FOND_YMD                  String
+  FOAS_MEMRD                String
+  LOAD_DTM                  String
 }
 
 model Infrastructure {

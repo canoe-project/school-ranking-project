@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 interface ILocationType {
   loaded: boolean;
-  coordinates?: { lat: number; lng: number };
+  coordinates: { lat: number; lng: number };
   error?: { code: number; message: string };
 }
 
@@ -28,6 +28,7 @@ const useGeolocation = () => {
   // 에러에 대한 로직
   const onError = (error: { code: number; message: string }) => {
     setLocation({
+      coordinates: { lat: 0, lng: 0 },
       loaded: true,
       error,
     });
@@ -48,4 +49,4 @@ const useGeolocation = () => {
   return location;
 };
 
-export default useGeolocation;
+export { useGeolocation };
